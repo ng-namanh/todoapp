@@ -7,6 +7,7 @@
       <input type="text" name="title" id="todo-job" v-model="title" class="text-area">
       <input type="submit" value="Add" class='add-btn' @click="addTodo()">
       <button class="cancel-btn" @click="addTodo()">Cancel</button>
+      <button></button>
     </form> 
 <div id="app">
 </div>
@@ -16,19 +17,33 @@ import TodoItems from './TodoItems.vue';
 import axios from 'axios';
  export default {
   components: {
-    TodoItems
+    TodoItems,
   },
    data() {
     return {
       todos: [],
       errors: [],
-      title: "",
-      idForTodo: 6,
+      title:"",
+      todoId: 6
     }
   },
     name:"TodoList",
     
   methods: {
+    addTodo() {
+      if (this.title.trim().length == 0) {
+        alert("Title is empty")
+        return
+      }
+      this.todos.push({
+        id: this.todoId,
+        title: this.title,
+        completed: false,
+      })
+      this.title = ''
+      this.todoId++
+      console.log(this.todos);
+    },
     async getTodo() {
   try {
     const response = await axios.get('https://jsonplaceholder.typicode.com/todos?_start=0&_limit=5&_delay=3000');
@@ -43,9 +58,6 @@ import axios from 'axios';
   mounted() {
     this.getTodo()
   },
-  addTodo() {
-      console.log("Hello");
-    },
  }
 </script>
 <style scoped>
