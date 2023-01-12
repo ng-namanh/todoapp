@@ -1,14 +1,25 @@
 <template>
-  <TodoItems :todo="todo" v-for="todo of todos" :key="todo.id" 
-/>
-    <form action="#" class="form">
+  
+  
+      <div >
+        <TodoItems :todo="todo" v-for="(todo, index) of todos" :key="todo.id" @deleteTodo="deleteTodo(index)"/> 
+      </div>
+          <div class="display-form"> 
+              <form action="#" class="show-form" :class="{'form': this.isShow}" >
+                
+                <h3>Title</h3>
+                <input type="text" name="title" id="todo-job" v-model="title" class="text-area">
+                <input type="submit" value="Add" class='add-btn' @click="addTodo()">
+                <button class="cancel-btn" @click="showForm()">Cancel</button>
+              </form> 
+          </div>
+    <div class="plus-btn-container">
+  
+      <font-awesome-icon icon="fa-solid fa-plus" class="plus-icon" @click="showForm()" 
+          :class="this.hidePlusButton ? '' : 'hide-plus-btn'"
       
-      <h3>Title</h3>
-      <input type="text" name="title" id="todo-job" v-model="title" class="text-area">
-      <input type="submit" value="Add" class='add-btn' @click="addTodo()">
-      <button class="cancel-btn" @click="addTodo()">Cancel</button>
-      <button></button>
-    </form> 
+      />
+    </div>
 <div id="app">
 </div>
 </template>
@@ -18,13 +29,16 @@ import axios from 'axios';
  export default {
   components: {
     TodoItems,
+    
   },
    data() {
     return {
       todos: [],
       errors: [],
-      title:"",
-      todoId: 6
+      title:'',
+      todoId: 6,
+      isShow: false,
+      hidePlusButton: true
     }
   },
     name:"TodoList",
@@ -42,7 +56,13 @@ import axios from 'axios';
       })
       this.title = ''
       this.todoId++
-      console.log(this.todos);
+    },
+    deleteTodo(index) {
+      this.todos.splice(index, 1)      
+    },
+    showForm() {
+      this.isShow = !this.isShow
+      this.hidePlusButton = !this.hidePlusButton
     },
     async getTodo() {
   try {
@@ -61,15 +81,29 @@ import axios from 'axios';
  }
 </script>
 <style scoped>
-  .form { 
+    .show-form { 
+        display: none;
         position: relative;
         width: 90%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
+        text-align: center;
         padding: 1rem;
         margin-bottom: 3.4rem;
+  }
+    .form {
+      display: block;
+    }
+    .plus-btn-container {
+      position: relative;
+    }
+    .plus-icon {
+      scale: 4;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(0, 50%);
+    }
+    .hide-plus-btn {
+      visibility: hidden;
     }
     .text-area {
         margin-top: 3rem;
@@ -111,5 +145,4 @@ import axios from 'axios';
         width: 7rem;
         height: 2.4rem;
     }
-
 </style>
