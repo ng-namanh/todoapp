@@ -1,14 +1,20 @@
 <template>
   <ul>
-    <li class="todo-list" >
+    <li class="todo-list" @dblclick="showMarkDone()">
       <p><strong>{{todo.title}}</strong></p>
       <button  class="delete-btn" @click="deleteTodo()"><font-awesome-icon icon="fa-solid fa-xmark" class="icon"/></button>
+      <div :class="{'mark-done': markDone}"></div> 
     </li>
   </ul>
 </template>
 <script>
    export default {
     name: 'todo-items',
+    data() {
+      return {
+        markDone: false,
+      }
+    },
     props: {
         todo: { 
             type : Object,
@@ -17,8 +23,13 @@
     },
     methods: {
         deleteTodo(index) {
-          /* console.log(this.todo); */
-          this.$emit('deleteTodo', index)
+         
+          if (confirm("Delete todo?") == true){
+            this.$emit('deleteTodo', index)
+          } else return null
+        },
+        showMarkDone() {
+          this.markDone = !this.markDone
         }
     },
    }
@@ -59,6 +70,16 @@
   }
   .todo-list:hover > .delete-btn {  
     visibility: visible;
+  }
+  .mark-done { 
+    position: relative;
+    top:0;
+    right: 2px;
+    width: 0.7rem;
+    height: 100%;
+    border: 1px solid rgb(118, 218, 118);
+    background-color: rgb(147, 245, 147);
+    
   }
 
 </style>

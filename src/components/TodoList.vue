@@ -29,7 +29,6 @@
       />
     </div>
   </div>
-  <div id="app"></div>
 </template>
 <script>
 import TodoItems from "./TodoItems.vue";
