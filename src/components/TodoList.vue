@@ -19,15 +19,16 @@
         <input type="submit" value="Add" class="add-btn" @click="addTodo()" />
         <button class="cancel-btn" @click="showForm()">Cancel</button>
       </form>
-    </div>
-    <div class="plus-btn-container">
+      <div class="plus-btn-container"  :class="this.hidePlusButton ? '' : 'hide-plus-btn'">
       <font-awesome-icon
         icon="fa-solid fa-plus"
         class="plus-icon"
         @click="showForm()"
-        :class="this.hidePlusButton ? '' : 'hide-plus-btn'"
+       
       />
     </div>
+    </div>
+   
   </div>
 </template>
 <script>
@@ -48,7 +49,9 @@ export default {
     };
   },
   name: "TodoList",
-
+  created() {
+    this.getTodo()
+  },
   methods: {
     addTodo() {
       if (this.title.trim().length == 0) {
@@ -78,7 +81,7 @@ export default {
         this.todos = response.data;
       } catch (error) {
         this.errors = error;
-        console.log(this.errors);
+        alert(this.errors)
       }
     },
   },
@@ -89,7 +92,11 @@ export default {
 </script>
 <style scoped>
 .show-form {
+  visibility: hidden;
   display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   position: relative;
   width: 90%;
   text-align: center;
@@ -97,20 +104,26 @@ export default {
   margin-bottom: 3.4rem;
 }
 .form {
+  visibility: visible;
   display: block;
 }
+.display-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+/*  Plus icon */
 .plus-btn-container {
-  position: relative;
+  margin: 2rem;
+  max-width: 100%;
+  height: 100%;
 }
 .plus-icon {
   scale: 4;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(0, 50%);
 }
 .hide-plus-btn {
-  visibility: hidden;
+  display: none;
 }
 .text-area {
   margin-top: 3rem;
@@ -137,11 +150,9 @@ h3 {
   border-radius: 0.5rem;
   width: 7rem;
   height: 2.4rem;
+  cursor: url(../assets/img/cursor.png), auto;
 }
-.add-btn:hover,
-.cancel-btn:hover {
-  cursor: pointer;
-}
+
 .cancel-btn {
   margin: 0.5rem;
   position: absolute;
@@ -152,5 +163,6 @@ h3 {
   border-radius: 0.5rem;
   width: 7rem;
   height: 2.4rem;
+  cursor: url(../assets/img/cursor.png), auto;
 }
 </style>

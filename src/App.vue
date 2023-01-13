@@ -1,12 +1,10 @@
 <template>
   <section id="app">
-    <div class="todo-form">
-      <TodoHeader />
-      <TodoList />
-    </div>
-    
-
-</section>
+        <div class="todo-form">
+          <TodoHeader />
+          <TodoList />
+        </div>  
+  </section>
  
 
 </template>
@@ -34,16 +32,23 @@ export default {
   justify-content: center;
   align-items: center;
   height: 100vh;
+  cursor: url(./assets/img/cursor.png), auto;
+  overflow:auto;
+  
 }
-
 .todo-form {
     display: table;
-    border: 2px solid black;
+    border: 3px solid black;
     border-radius: 20px;
     margin: 0 auto;
-    max-width: 50%;
+    max-width: 60%;
+    min-width: 30%;
     height: 60%;
+    max-height: 60%;
     
 }
+/* .todo-form:hover {
+ cursor: url(./assets/img/cursor.png), auto;
+} */
 
 </style>

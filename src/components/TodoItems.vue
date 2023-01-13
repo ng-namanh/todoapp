@@ -41,23 +41,30 @@
       list-style: none;
       border: 1px solid black;
       border-radius: 0.75rem;
-      margin: 0.5rem  ;
+      margin: 0.5rem;
+      padding: 0.5rem;
       height: 4rem;
+      min-height: 100%;
       display: flex;
       flex-direction: row-reverse;
       justify-items: center;
       align-items: center;
       justify-content: space-between;
-      
+      user-select: none;   
 }
+  
   p { 
     margin: 0 auto;
-    max-width: 70%;
+    max-width: 50%;
+    display: -webkit-box;
+  -webkit-line-clamp: 10;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
   }
   .delete-btn {
     visibility: hidden;
     position: absolute;
-    
+    cursor: url(../assets/img/cursor.png), auto;
   }
   .icon {
     position: absolute;
