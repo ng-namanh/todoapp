@@ -1,11 +1,13 @@
 <template>
   <div>
+  <div class="list-container">
     <TodoItems
       :todo="todo"
       v-for="(todo, index) of todos"
       :key="todo.id"
       @deleteTodo="deleteTodo(index)"
     />
+  </div>
     <div class="display-form">
       <form action="#" class="show-form" :class="{ form: this.isShow }">
         <h3>Title</h3>
@@ -19,12 +21,11 @@
         <input type="submit" value="Add" class="add-btn" @click="addTodo()" />
         <button class="cancel-btn" @click="showForm()">Cancel</button>
       </form>
-      <div class="plus-btn-container"  :class="this.hidePlusButton ? '' : 'hide-plus-btn'">
+    <div class="plus-btn-container"  :class="this.hidePlusButton ? '' : 'hide-plus-btn'">
       <font-awesome-icon
         icon="fa-solid fa-plus"
         class="plus-icon"
         @click="showForm()"
-       
       />
     </div>
     </div>
@@ -91,8 +92,18 @@ export default {
 };
 </script>
 <style scoped>
+
+.list-container { 
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  margin: 0 auto;
+  width: 95%;
+  flex-grow: 2;
+  
+}
 .show-form {
-  visibility: hidden;
   display: none;
   flex-direction: column;
   justify-content: center;
@@ -104,7 +115,6 @@ export default {
   margin-bottom: 3.4rem;
 }
 .form {
-  visibility: visible;
   display: block;
 }
 .display-form {
