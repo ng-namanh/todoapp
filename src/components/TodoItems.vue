@@ -3,7 +3,7 @@
     <li class="todo-list" @dblclick="showMarkDone()">
       <p><strong>{{todo.title}}</strong></p>
       <button  class="delete-btn" @click="deleteTodo()"><font-awesome-icon icon="fa-solid fa-xmark" class="icon"/></button>
-      <div :class="{'mark-done': markDone}"></div> 
+      <div :class="{'show-mark-done': markDone}" class="mark-done"></div> 
     </li>
   </ul>
 </template>
@@ -31,6 +31,7 @@
         showMarkDone() {
           this.markDone = !this.markDone
         }
+
     },
    }
 
@@ -42,8 +43,7 @@
       border: 1px solid black;
       border-radius: 0.75rem;
       margin: 0.5rem;
-      padding: 0.5rem;
-      height: 4rem;
+      height: 4.1rem;
       min-height: 100%;
       display: flex;
       flex-direction: row-reverse;
@@ -51,15 +51,20 @@
       align-items: center;
       justify-content: space-between;
       user-select: none;   
+      overflow: hidden;
 }
   
   p { 
     margin: 0 auto;
-    max-width: 50%;
+    max-width: 67%;
+    overflow: auto;
+    word-break: break-all;
     display: -webkit-box;
-  -webkit-line-clamp: 10;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-word;
   }
   .delete-btn {
     visibility: hidden;
@@ -79,14 +84,17 @@
     visibility: visible;
   }
   .mark-done { 
+    visibility: hidden;
     position: relative;
     top:0;
-    right: 2px;
+    right: 3px;
     width: 0.7rem;
     height: 100%;
     border: 1px solid rgb(118, 218, 118);
     background-color: rgb(147, 245, 147);
-    
+  }
+  .show-mark-done {
+    visibility: visible;
   }
 
 </style>

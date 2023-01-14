@@ -33,7 +33,7 @@ export default {
   align-items: center;
   height: 100vh;
   cursor: url(./assets/img/cursor.png), auto;
-  overflow:auto;
+
   
 }
 .todo-form {
@@ -41,14 +41,11 @@ export default {
     border: 3px solid black;
     border-radius: 20px;
     margin: 0 auto;
-    max-width: 60%;
-    min-width: 30%;
+    width: 30%;
     height: 60%;
     max-height: 60%;
+    overflow-y:auto
     
 }
-/* .todo-form:hover {
- cursor: url(./assets/img/cursor.png), auto;
-} */
 
 </style>
