@@ -4,9 +4,7 @@
       <p>
         <strong>{{ todo.title }}</strong>
       </p>
-      <button class="delete-btn" @click="deleteTodo()">
-        <font-awesome-icon icon="fa-solid fa-xmark" class="icon" />
-      </button>
+        <font-awesome-icon icon="fa-solid fa-xmark" class="x-icon" @click="deleteTodo()" />
       <div :class="{ 'show-mark-done': markDone }" class="mark-done"></div>
     </li>
   </ul>
@@ -45,7 +43,7 @@ export default {
   height: 4.1rem;
   min-height: 100%;
   display: flex;
-  flex-direction: row-reverse;
+  flex-direction: row;
   justify-items: center;
   align-items: center;
   justify-content: space-between;
@@ -65,22 +63,20 @@ p {
   overflow: hidden;
   text-overflow: ellipsis;
   word-break: break-word;
+  flex-grow: 0;
 }
-.delete-btn {
-  visibility: hidden;
-  position: absolute;
-  cursor: url(../assets/img/cursor.png), auto;
-}
-.icon {
-  position: absolute;
-  top: -7px;
-  left: -37px;
+.x-icon {
+  visibility:hidden;
+  position: relative;
+  top:1px;
+  right: 9px;
   scale: 3;
+  flex-shrink: 1;
 }
 .todo-list:hover {
   background-color: rgba(0, 0, 0, 0.16);
 }
-.todo-list:hover > .delete-btn {
+.todo-list:hover > .x-icon {
   visibility: visible;
 }
 .mark-done {
