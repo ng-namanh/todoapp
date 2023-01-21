@@ -40,6 +40,13 @@ export default {
   width: 30%;
   height: 60%;
   max-height: 60%;
+}
 
+@media screen and (max-width: 634px) {
+  .todo-form {
+    width: 80%;
+    height: 100%;
+  }
+  
 }
 </style>
