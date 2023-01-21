@@ -1,11 +1,12 @@
 <template>
   <ul>
     <li class="todo-list" @dblclick="showMarkDone()">
+      <div :class="{ 'show-mark-done': markDone }" class="mark-done"></div>
       <p>
         <strong>{{ todo.title }}</strong>
       </p>
-        <font-awesome-icon icon="fa-solid fa-xmark" class="x-icon" @click="deleteTodo()" />
-      <div :class="{ 'show-mark-done': markDone }" class="mark-done"></div>
+      <font-awesome-icon icon="fa-solid fa-xmark" class="x-icon" @click="deleteTodo()" />
+      
     </li>
   </ul>
 </template>
@@ -37,6 +38,7 @@ export default {
 </script>
 <style scoped>
 .todo-list {
+  position: relative;
   list-style: none;
   border: 1px solid black;
   border-radius: 0.75rem;
@@ -68,8 +70,8 @@ p {
 .x-icon {
   visibility:hidden;
   position: relative;
-  top:1px;
-  right: 9px;
+  bottom:1px;
+  right: 1.5rem;
   scale: 3;
   flex-shrink: 1;
 }
